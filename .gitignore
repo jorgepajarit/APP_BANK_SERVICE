@@ -1,2 +1,11 @@
-.zig-cache/
-zig-out/
+# Entornos virtuales
+.venv/
+venv/
+ENV/
+env/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
