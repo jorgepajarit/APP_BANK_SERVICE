@@ -1,7 +1,7 @@
 # BITACORA.md -- Registro de implementación de BankService
 
-- Pasos ejecutados: 10 de 15.
-- Paso en curso: CAM-11 (Pendiente).
+- Pasos ejecutados: 12 de 15.
+- Paso en curso: CAM-13 (Pendiente).
 - Última actualización: 2026-05-14
 - Rama de trabajo: main.
 
@@ -18,8 +18,8 @@
 - [x] CAM-08 - Implementar simulador y flujos de webhooks para PSE
 - [x] CAM-09 - Implementar modo memoria (`MockRepository`, `MockUoW`)
 - [x] CAM-10 - Implementar repositorios de SQLAlchemy y PostgreSQL
-- [ ] CAM-11 - Desarrollar utilidades de seguridad (PyJWT, Passlib)
-- [ ] CAM-12 - Exponer adaptadores de entrada HTTP (Routers de FastAPI)
+- [x] CAM-11 - Desarrollar utilidades de seguridad (PyJWT, Passlib)
+- [x] CAM-12 - Exponer adaptadores de entrada HTTP (Routers de FastAPI)
 - [ ] CAM-13 - Desarrollar aplicación cliente interactiva usando Flask
 - [ ] CAM-14 - Configurar Docker (creación de Dockerfiles y docker-compose.yml)
 - [ ] CAM-15 - Verificar métricas y lanzar CI (100% Cobertura)
@@ -108,6 +108,22 @@
 - **Commit:** pendiente
 - **Observación técnica breve:** Se implementó la persistencia real utilizando SQLAlchemy 2.0. Se optó por un mapeo imperativo para mantener las entidades de dominio totalmente limpias de dependencias del ORM. Se validó el funcionamiento del Unit of Work y los repositorios mediante una base de datos SQLite en memoria para pruebas.
 
+### Paso 11 - Desarrollar utilidades de seguridad (PyJWT, Passlib)
+- **Fecha:** 2026-05-14 20:38
+- **Archivos modificados:** `App/fastapi_app/adapters/outbound/security/jwt_service.py`, `App/fastapi_app/adapters/outbound/security/passlib_hasher.py`, `App/fastapi_app/tests/unit/test_security_adapters.py`
+- **Validación ejecutada:** `pytest App/fastapi_app/tests/unit/test_security_adapters.py`
+- **Resultado:** OK
+- **Commit:** pendiente
+- **Observación técnica breve:** Se implementaron los adaptadores de salida para los puertos `TokenService` y `PasswordHasher`. Se utilizó `pyjwt` para la generación/verificación de tokens y `passlib` (con `pbkdf2_sha256`) para un hash seguro sin fricciones de dependencias de C. Todo se aisló en la capa externa de adaptadores.
+
+### Paso 12 - Exponer adaptadores de entrada HTTP (Routers de FastAPI)
+- **Fecha:** 2026-05-14 21:03
+- **Archivos modificados:** `App/fastapi_app/adapters/inbound/http/schemas.py`, `App/fastapi_app/adapters/inbound/http/exception_handlers.py`, `App/fastapi_app/adapters/inbound/http/dependencies.py`, `App/fastapi_app/adapters/inbound/http/routers/auth.py`, `App/fastapi_app/adapters/inbound/http/routers/banking.py`, `App/fastapi_app/adapters/inbound/http/routers/pse.py`, `App/fastapi_app/main.py`, `App/fastapi_app/tests/e2e/test_http_endpoints.py`
+- **Validación ejecutada:** `pytest App/fastapi_app/tests/e2e/test_http_endpoints.py -v`
+- **Resultado:** OK (6/6 tests pasaron)
+- **Commit:** pendiente
+- **Observación técnica breve:** Se implementaron los tres routers HTTP (auth, banking, pse) con sus esquemas Pydantic, un manejador global de excepciones de dominio que traduce errores puros a respuestas HTTP (401, 404, 400), y la inyección de dependencias via `fastapi.Depends`. La instancia `InMemoryUnitOfWork` actúa como adaptador de salida por defecto para los tests E2E, garantizando velocidad y sin dependencia de BD.
+
 <!-- Plantilla a copiar y rellenar cada vez que se finalice un paso -->
 ### Paso {N} - {Título corto del paso}
 - **Fecha:** YYYY-MM-DD HH:MM
@@ -150,6 +166,11 @@
 - **Decisión:** Se utilizó `mapper_registry.map_imperatively` en lugar de herencia declarativa (`Base`).
 - **Justificación:** Para cumplir con el principio de Arquitectura Hexagonal y DDD de mantener el núcleo (dominio) 100% independiente de frameworks de infraestructura.
 - **Impacto:** Las entidades en `domain/` no heredan de nada ni tienen decoradores de SQLAlchemy, facilitando su portabilidad y testeo.
+
+### DEC-07 (Paso 11) - Algoritmo Hash en Passlib
+- **Decisión:** Se utilizó `pbkdf2_sha256` en lugar de `bcrypt` como scheme de encriptación en Passlib.
+- **Justificación:** `bcrypt` suele requerir extensiones nativas en C o librerías adicionales en algunos entornos Windows, mientras que `pbkdf2` viene embebido y facilita el despliegue multiplataforma del modo memoria/simulación manteniendo un alto nivel de seguridad comercial.
+- **Impacto:** Ninguno sobre la capa de aplicación, pero simplifica la instalación del backend localmente.
 
 <!-- Plantilla para registrar decisiones técnicas importantes que se tomen sobre la marcha -->
 ### DEC-XX (Paso X) - {Título de la decisión}
