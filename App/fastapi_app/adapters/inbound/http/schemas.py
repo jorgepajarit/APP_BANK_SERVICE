@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from typing import List, Optional
 
 class LoginRequest(BaseModel):
@@ -23,6 +23,7 @@ class PSEWebhookRequest(BaseModel):
     status: str
 
 class AccountResponse(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
     id: int
     user_id: int
     balance: float
@@ -35,4 +36,6 @@ class MovementResponse(BaseModel):
 
 class FinancialSummaryResponse(BaseModel):
     user_id: int
+    accounts: List[AccountResponse]
+    wallets: List[AccountResponse]
     total_consolidated_balance: float

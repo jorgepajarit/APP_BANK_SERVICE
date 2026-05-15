@@ -2,6 +2,10 @@ fastapi
 uvicorn
 sqlalchemy
 pytest
+pytest-cov
 flask
 pyjwt
 passlib
+httpx
+requests
+python-multipart
