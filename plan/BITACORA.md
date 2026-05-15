@@ -200,7 +200,7 @@ BankService ha sido implementado exitosamente siguiendo una Arquitectura Hexagon
 ### DEC-09 (Paso 13) - Seeding de Datos en Modo Memoria
 - **Decisión:** Se implementó una función `_seed_data()` en `dependencies.py`.
 - **Justificación:** Para facilitar las pruebas locales y la demostración sin depender de una base de datos externa inicialmente.
-- **Impacto:** Permite que el usuario `admin` (o `jorgepajarit`) exista al arrancar el backend en modo memoria.
+- **Impacto:** Permite que el usuario `admin` exista al arrancar el backend en modo memoria.
 
 <!-- Plantilla para registrar decisiones técnicas importantes que se tomen sobre la marcha -->
 ### DEC-XX (Paso X) - {Título de la decisión}
