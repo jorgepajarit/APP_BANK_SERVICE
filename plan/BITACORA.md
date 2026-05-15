@@ -192,6 +192,16 @@ BankService ha sido implementado exitosamente siguiendo una Arquitectura Hexagon
 - **Justificación:** `bcrypt` suele requerir extensiones nativas en C o librerías adicionales en algunos entornos Windows, mientras que `pbkdf2` viene embebido y facilita el despliegue multiplataforma del modo memoria/simulación manteniendo un alto nivel de seguridad comercial.
 - **Impacto:** Ninguno sobre la capa de aplicación, pero simplifica la instalación del backend localmente.
 
+### DEC-08 (Paso 13) - Integración de Ruta de Transferencias
+- **Decisión:** Se añadió la ruta `/transfer` y la plantilla `transfer.html` a la aplicación Flask.
+- **Justificación:** Aunque inicialmente se planteó solo un Dashboard, la funcionalidad de transferencias es crítica para el flujo completo del usuario y debe estar expuesta para pruebas de integración.
+- **Impacto:** Permite validar el flujo completo desde el login hasta la transferencia exitosa consumiendo la API de FastAPI.
+
+### DEC-09 (Paso 13) - Seeding de Datos en Modo Memoria
+- **Decisión:** Se implementó una función `_seed_data()` en `dependencies.py`.
+- **Justificación:** Para facilitar las pruebas locales y la demostración sin depender de una base de datos externa inicialmente.
+- **Impacto:** Permite que el usuario `admin` (o `jorgepajarit`) exista al arrancar el backend en modo memoria.
+
 <!-- Plantilla para registrar decisiones técnicas importantes que se tomen sobre la marcha -->
 ### DEC-XX (Paso X) - {Título de la decisión}
 - **Decisión:** {Qué se decidió implementar de cierta manera}
@@ -201,6 +211,13 @@ BankService ha sido implementado exitosamente siguiendo una Arquitectura Hexagon
 ---
 
 ## Registro de Bloqueos (BLOQ)
+
+<!-- Plantilla para documentar errores graves, callejones sin salida o fugas en la arquitectura -->
+### BLOQ-01 (Paso 13) - Error de Atributo en el Seeding
+- **Síntoma:** `AttributeError: 'PasslibPasswordHasher' object has no attribute 'hash_password'`.
+- **Causa probable:** Se utilizó un nombre de método incorrecto en el código de sembrado (se usó `hash_password` en lugar del nombre definido en el puerto `get_password_hash`).
+- **Solución aplicada:** Se corrigió el nombre del método a `get_password_hash` en `dependencies.py` y se forzó la actualización del archivo mediante comandos de sistema para evitar problemas de sincronización de caché.
+- **Evidencia:** Servidor FastAPI arrancando exitosamente y permitiendo el login.
 
 <!-- Plantilla para documentar errores graves, callejones sin salida o fugas en la arquitectura -->
 ### BLOQ-XX (Paso X) - {Título del bloqueo}

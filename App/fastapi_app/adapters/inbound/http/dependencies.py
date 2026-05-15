@@ -8,6 +8,24 @@ from App.fastapi_app.application.banking.services import BankingQueryService, Tr
 # Global instance for memory persistence across requests
 _mock_uow = InMemoryUnitOfWork()
 
+def _seed_data():
+    from App.fastapi_app.domain.auth.entities import User
+    from App.fastapi_app.domain.banking.entities import Account
+    from App.fastapi_app.adapters.outbound.security.passlib_hasher import PasslibPasswordHasher
+    
+    hasher = PasslibPasswordHasher()
+    hashed = hasher.get_password_hash("password123")
+    
+    # Crear usuario y cuenta de prueba
+    user = User(id=1, username="admin", password_hash=hashed)
+    account = Account(id=1, user_id=1, balance=50000.0)
+    
+    _mock_uow.users.save(user)
+    _mock_uow.accounts.save(account)
+
+# Ejecutar seed al cargar el módulo
+_seed_data()
+
 def get_uow() -> InMemoryUnitOfWork:
     return _mock_uow
 

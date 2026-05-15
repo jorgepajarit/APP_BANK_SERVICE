@@ -20,10 +20,10 @@
 | CAM-07 | Implementar servicio de Transferencias con reglas estrictas | Aplicación | INV-01, INV-02, INV-03, INV-04 |
 | CAM-08 | Implementar simulador y flujos de webhooks para PSE | Aplicación | context/DOMAIN.md |
 | CAM-09 | Implementar modo memoria (`MockRepository`, `MockUoW`) | Infraestructura | context/TECH_CONSTRAINTS.md |
-| CAM-10 | Implementar repositorios de SQLAlchemy y PostgreSQL | Infraestructura | context/TECH_CONSTRAINTS.md |
+| CAM-10 | Implementar repositorios de SQLAlchemy, creación de esquemas e inserción de datos iniciales (Seeding) | Infraestructura | context/TECH_CONSTRAINTS.md |
 | CAM-11 | Desarrollar utilidades de seguridad (PyJWT, Passlib) | Infraestructura | context/ARCHITECTURE.md |
 | CAM-12 | Exponer adaptadores de entrada HTTP (Routers de FastAPI) | Infraestructura | context/ARCHITECTURE.md |
-| CAM-13 | Desarrollar aplicación cliente (Flask) con estética Glassmorphism | Presentación | specs/UI_SPEC_001_dashboard_bancario.md |
+| CAM-13 | Desarrollar aplicación cliente (Flask) con estética Glassmorphism, incluyendo Login, Dashboard y Transferencias | Presentación | specs/UI_SPEC_001_dashboard_bancario.md |
 | CAM-14 | Configurar Docker (creación de Dockerfiles y docker-compose.yml) | Infraestructura | context/TECH_CONSTRAINTS.md |
 | CAM-15 | Verificar métricas y lanzar CI (100% Cobertura) | Pruebas | README.md |
 

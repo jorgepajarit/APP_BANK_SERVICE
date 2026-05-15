@@ -30,6 +30,12 @@ Crear una experiencia de usuario premium y moderna basada en la estética **Glas
   - Indicadores visuales: Flecha verde arriba para ingresos (CREDIT), flecha roja abajo para egresos (DEBIT).
 - **Acceso Rápido:** Botón flotante o barra lateral para "Transferir" y "Pagar PSE".
 
+### C. Formulario de Transferencias
+- **Selector de Origen:** Menú desplegable con las cuentas disponibles y sus saldos.
+- **Campos de Destino:** Input numérico para el ID de la cuenta destino.
+- **Monto:** Input de moneda con validación de dos decimales.
+- **Confirmación:** Botón prominente de transferencia con aviso de seguridad.
+
 ## 4. Comportamiento (UX)
 - **Carga (Spinners):** Todos los botones deben mostrar un estado de carga al ser clickeados mientras se espera la respuesta de la API.
 - **Notificaciones (Toasts):** Mensajes emergentes para confirmar transferencias exitosas o mostrar errores de "Saldo Insuficiente".

@@ -30,7 +30,7 @@ def index():
         return redirect(url_for('dashboard'))
     return redirect(url_for('login_view'))
 
-@app.route("/login", methods=['GET', 'POST'])
+@app.route("/login_view", methods=['GET', 'POST'])
 def login_view():
     if request.method == 'POST':
         username = request.form.get('username')
@@ -57,6 +57,43 @@ def login_view():
             flash(f"Error al conectar con el servidor: {str(e)}", "error")
             
     return render_template("login.html")
+
+@app.route("/transfer", methods=['GET', 'POST'])
+def transfer_view():
+    if 'token' not in session:
+        return redirect(url_for('login_view'))
+        
+    user_id = session.get('user_id', 1)
+    
+    if request.method == 'POST':
+        source_id = request.form.get('source_id')
+        target_id = request.form.get('target_id')
+        amount = float(request.form.get('amount', 0))
+        
+        try:
+            res = requests.post(f"{API_BASE_URL}/banking/transfer", json={
+                "source_account_id": int(source_id),
+                "target_account_id": int(target_id),
+                "amount": amount
+            }, headers=get_auth_headers())
+            
+            if res.status_code == 200:
+                flash("Transferencia realizada con éxito", "success")
+                return redirect(url_for('dashboard'))
+            else:
+                error_msg = res.json().get('detail', 'Error desconocido')
+                flash(f"Error en transferencia: {error_msg}", "error")
+        except Exception as e:
+            flash(f"Error de conexión: {str(e)}", "error")
+
+    # Load accounts for the select field
+    try:
+        summary_res = requests.get(f"{API_BASE_URL}/banking/summary/{user_id}", headers=get_auth_headers())
+        accounts = summary_res.json().get('accounts', []) if summary_res.status_code == 200 else []
+    except:
+        accounts = []
+        
+    return render_template("transfer.html", accounts=accounts)
 
 @app.route("/dashboard")
 def dashboard():
