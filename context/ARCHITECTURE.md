@@ -11,6 +11,17 @@ Se utiliza **Arquitectura Hexagonal (Ports & Adapters)** estructurada en tres zo
   - **`inbound`**: Rutas HTTP de FastAPI (reciben peticiones web y llaman a los casos de uso).
   - **`outbound`**: Repositorios basados en SQLAlchemy, utilidades criptográficas para JWT/Hashing, y notificaciones HTTP a servicios externos (ej. AWS Lambda).
 
+## 2.1 Contrato de Endpoints (UI/API)
+Para evitar errores de rutas (404), todas las implementaciones de UI deben adherirse al siguiente contrato de la API:
+| Funcionalidad | Método | Endpoint Backend (API) |
+|---|---|---|
+| Login | `POST` | `/auth/login` |
+| Resumen Financiero | `GET` | `/banking/summary/{user_id}` |
+| Movimientos | `GET` | `/banking/accounts/{id}/movements` |
+| Transferencia | `POST` | `/banking/transfer` |
+| Iniciar Pago PSE | `POST` | `/pse/payment` |
+| Webhook PSE | `POST` | `/pse/webhook` |
+
 ## 3. Estructura de Directorios
 ```text
 App/

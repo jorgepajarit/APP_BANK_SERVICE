@@ -202,6 +202,11 @@ BankService ha sido implementado exitosamente siguiendo una Arquitectura Hexagon
 - **Justificación:** Para facilitar las pruebas locales y la demostración sin depender de una base de datos externa inicialmente.
 - **Impacto:** Permite que el usuario `admin` exista al arrancar el backend en modo memoria.
 
+### DEC-10 (Paso 13) - Flujo de Pagos PSE Simulado
+- **Decisión:** Se implementó la ruta `/pse_payment`, la plantilla `pse_payment.html` y un disparador automático de webhook en la vista de Flask.
+- **Justificación:** Para cumplir con el alcance de CAM-08 y CAM-13, permitiendo probar la integración asíncrona de PSE de manera sencilla desde la UI.
+- **Impacto:** El dashboard ahora permite iniciar pagos PSE que se auto-aprueban mediante una llamada interna al webhook del backend.
+
 <!-- Plantilla para registrar decisiones técnicas importantes que se tomen sobre la marcha -->
 ### DEC-XX (Paso X) - {Título de la decisión}
 - **Decisión:** {Qué se decidió implementar de cierta manera}

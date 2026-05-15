@@ -23,7 +23,7 @@
 | CAM-10 | Implementar repositorios de SQLAlchemy, creación de esquemas e inserción de datos iniciales (Seeding) | Infraestructura | context/TECH_CONSTRAINTS.md |
 | CAM-11 | Desarrollar utilidades de seguridad (PyJWT, Passlib) | Infraestructura | context/ARCHITECTURE.md |
 | CAM-12 | Exponer adaptadores de entrada HTTP (Routers de FastAPI) | Infraestructura | context/ARCHITECTURE.md |
-| CAM-13 | Desarrollar aplicación cliente (Flask) con estética Glassmorphism, incluyendo Login, Dashboard y Transferencias | Presentación | specs/UI_SPEC_001_dashboard_bancario.md |
+| CAM-13 | Desarrollar aplicación cliente (Flask) con estética Glassmorphism, incluyendo Login, Dashboard, Transferencias y PSE. **Requisito:** Validar que cada botón tenga su ruta y template (`login.html`, `dashboard.html`, `transfer.html`, `pse_payment.html`) y coincida con el contrato de la API en `ARCHITECTURE.md`. | Presentación | specs/UI_SPEC_001_dashboard_bancario.md |
 | CAM-14 | Configurar Docker (creación de Dockerfiles y docker-compose.yml) | Infraestructura | context/TECH_CONSTRAINTS.md |
 | CAM-15 | Verificar métricas y lanzar CI (100% Cobertura) | Pruebas | README.md |
 
