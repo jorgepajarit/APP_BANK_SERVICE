@@ -1,6 +1,6 @@
 from typing import Protocol, Optional, List, Any
 from App.fastapi_app.domain.auth.entities import User
-from App.fastapi_app.domain.banking.entities import Account, Wallet, Movement
+from App.fastapi_app.domain.banking.entities import Account, Wallet, Movement, PSETransaction
 
 class UserRepository(Protocol):
     def get_by_username(self, username: str) -> Optional[User]:
@@ -14,6 +14,9 @@ class UserRepository(Protocol):
 
 class AccountsRepository(Protocol):
     def get_by_id(self, account_id: int) -> Optional[Account]:
+        ...
+        
+    def get_by_user_id(self, user_id: int) -> List[Account]:
         ...
         
     def save(self, account: Account) -> None:
@@ -31,8 +34,8 @@ class MovementRepository(Protocol):
         ...
 
 class PSETransactionRepository(Protocol):
-    def get_by_transaction_id(self, transaction_id: str) -> Optional[Any]:
+    def get_by_transaction_id(self, transaction_id: str) -> Optional[PSETransaction]:
         ...
         
-    def save(self, transaction: Any) -> None:
+    def save(self, transaction: PSETransaction) -> None:
         ...
