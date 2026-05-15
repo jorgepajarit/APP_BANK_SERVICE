@@ -83,6 +83,11 @@
 - **Justificación:** La entidad pura `PSETransaction` no fue creada en CAM-02, pero como el webhook se maneja como un diccionario/json asíncrono, se usó un tipado flexible para evitar bloquear el diseño del puerto.
 - **Impacto:** Si se decide tipar fuertemente las transacciones de la pasarela de pagos, se creará su propia entidad en pasos posteriores.
 
+### DEC-03 (Documentación) - Adopción de estética Glassmorphism
+- **Decisión:** Se definió oficialmente el estilo visual del frontend como "Glassmorphism" con Dark Mode.
+- **Justificación:** Basado en la referencia del repositorio externo exitoso y para cumplir con el requisito de "experiencia premium" del usuario.
+- **Impacto:** Se creó `specs/UI_SPEC_001_dashboard_bancario.md` y se actualizó el plan atómico para el paso CAM-13.
+
 <!-- Plantilla para registrar decisiones técnicas importantes que se tomen sobre la marcha -->
 ### DEC-XX (Paso X) - {Título de la decisión}
 - **Decisión:** {Qué se decidió implementar de cierta manera}

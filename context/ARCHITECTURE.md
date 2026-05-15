@@ -51,7 +51,7 @@ La capa de aplicación define interfaces estrictas (puertos) que la infraestruct
   - Persistencia relacional usando SQLAlchemy en `adapters/outbound/persistence/sqlalchemy/`.
   - Servicios de seguridad (PyJWT, Passlib) en `adapters/outbound/security/`.
   - Mock Repositories para ejecución en "Modo Memoria" sin base de datos.
-- **Frontend:** Existe una aplicación web independiente (en `flask_app`) que actúa como cliente de la API HTTP.
+- **Frontend:** Existe una aplicación web independiente (en `flask_app`) que actúa como cliente de la API HTTP, diseñada bajo estándares de **Glassmorphism** para una experiencia premium.
 
 ## 7. Verificación arquitectónica mínima
 Se debe asegurar mediante comprobaciones estáticas que las capas internas están totalmente limpias de frameworks de infraestructura.

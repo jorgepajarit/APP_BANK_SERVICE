@@ -8,6 +8,8 @@
 - **Infraestructura:** Docker y Docker Compose para asegurar despliegues reproducibles.
 - **Testing:** Pytest para la suite de pruebas unitarias (en memoria) y E2E.
 - **Frontend:** Flask (exclusivo para el frontend independiente que consume la API, ubicado en `flask_app`).
+- **Aesthetic:** Glassmorphism (Efecto cristal con desenfoque de fondo y tarjetas translúcidas).
+- **Icons:** Font Awesome (v6+) para representación visual de productos financieros.
 - **Aislamiento de Dependencias:** Es obligatorio el uso de un entorno virtual (`.venv`) aislando las dependencias definidas en `requirements.txt`.
 
 ## 2. Prohibiciones (Restricciones Arquitectónicas)
